@@ -1,4 +1,4 @@
-//checks whether any permutation of an input string is a palindrome
+//Find whether a string contains a contiguous palindromic substring in O(n) time.
 
 function isPalindrome(str){
   var isPalind;
@@ -30,3 +30,31 @@ function isPalindrome(str){
     }else{return false;}
   
 }
+
+
+//checks whether any permutation of an input string is a palindrome.
+
+function isPalindrome(str){
+  var mySet = new Set();
+  
+  for(var i=0; i<str.length; i++){
+    var tempLetter = str[i];
+   // console.log(mySet.has(tempLetter));
+    if(mySet.has(tempLetter)){
+      mySet.delete(tempLetter);
+    }else{
+      mySet.add(tempLetter);
+    }
+  }
+  if(mySet.size<=1){
+    return true;
+  }else{return false;}
+  
+}
+
+//str="civvic";
+//isPalindrome(str);
+//console.log(isPalindrome("civic"));
+//console.log(isPalindrome("ivicc")); 
+//console.log(isPalindrome("civil")); 
+console.log(isPalindrome("livcivc")); 
