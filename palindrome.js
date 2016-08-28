@@ -58,3 +58,21 @@ function isPalindrome(str){
 //console.log(isPalindrome("ivicc")); 
 //console.log(isPalindrome("civil")); 
 console.log(isPalindrome("livcivc")); 
+
+
+function isPalindrome(str){
+  if(str.length==1){
+	  return 'is Palindrome';
+	}
+	var temp = str.split('');
+	var l = temp.length;
+	var mid = Math.floor(l/2);
+	for(var i=0; i<mid; i++){
+		if(temp[i] !== temp[l-1-i]){
+		   console.log(temp[i]);
+			 console.log(temp[l-1-i]);
+       return 'no a P';
+		}
+  }		
+	return 'is P';
+}
