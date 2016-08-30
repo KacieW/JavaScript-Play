@@ -1,0 +1,60 @@
+<html>
+<head>
+
+<style>
+li{display:inline;}
+
+.active{
+  color:green;
+}
+</style>
+</head>
+<body>
+<nav class="tab">
+  <li><a href="#" class="tablinks" onClick="changeTo('London')">London</a></li>
+  <li><a href="#" class="tablinks" onClick="changeTo('Paris')">Paris</a></li>
+  <li><a href="#" class="tablinks" onClick="changeTo('Tokyo')">Tokyo</a></li>
+</nav>
+
+<div id="London" class="tabcontent">
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent" style="display:none;">
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Tokyo" class="tabcontent" style="display:none;">
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<script>
+var tablinks = document.getElementsByClassName('tablinks');
+
+for(var i=0; i<tablinks.length; i++){
+   tablinks[i].addEventListener('click', colorMe);
+}
+function colorMe(){
+  for(var i=0; i<tablinks.length; i++){
+    tablinks[i].classList.remove('active');
+    this.classList.add('active');
+  }
+}
+function changeTo(id){
+  var target = document.getElementById(id);
+if(target.style.display=="none"){
+  target.style.display="";
+  if(id!=='London'){
+    document.getElementById('London').style.display='none';
+  }
+  if(id!=='Paris'){
+    document.getElementById('Paris').style.display='none';
+  }
+  if(id!=='Tokyo'){
+    document.getElementById('Tokyo').style.display='none';
+  }
+  }
+}
+</script>
+</body>
+</html>
