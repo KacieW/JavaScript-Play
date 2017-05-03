@@ -1,0 +1,243 @@
+<style>
+body {
+  background: linear-gradient(90deg, #f7c736, #ff866b);
+  background-size: 100%;
+  font-family: montserrat, arial, verdana;
+}
+
+#myForm {
+  width: 560px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+#steps {
+  counter-reset: steps;
+  list-style-type: none;
+  overflow: hidden;
+}
+
+li {
+  width: 25%;
+  float: left;
+  position: relative;
+  font-size: 0.7em;
+}
+
+li:before {
+  counter-increment: steps;
+  content: counter(steps);
+  display: block;
+  background-color: white;
+  width: 20px;
+  line-height: 20px;
+  padding: 2px;
+  border-radius: 100%;
+  margin: 6px auto;
+}
+
+li:after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -50%;
+  top: 17px;
+  z-index: -1;
+}
+
+li:first-child:after {
+  display: none;
+}
+
+li.active:before,
+.active:after {
+  background: #866BFF;
+  color: #F0ECFF;
+}
+
+fieldset {
+  position: relative;
+  background-color: white;
+  border: none;
+  box-shadow: 3px 4px 5px rgba(112, 106, 106, 0.5);
+  border-radius: 5px;
+  margin: 50px 0;
+	padding-top:20px;
+}
+
+@keyframes showme {
+  0% {
+    left: 800px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes hideme {
+  0% {
+    left: -800px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+
+fieldset:not(:first-of-type) {
+  display: none;
+}
+
+input {
+  box-sizing: border-box;
+  height: 60px;
+  width: 100%;
+  margin: 10px 0;
+  padding:10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.btn {
+  height: 50px;
+  width: 120px;
+  background: #866BFF;
+  border: none;
+  font-size: .89em;
+  color: #F0ECFF;
+  position: center;
+  margin: 10px 5px;
+  box-shadow: 0 0 1px 1px rgba(128, 125, 143, 0.7);
+  border-radius: 3px;
+}
+
+.btn:hover {
+  box-shadow: 0 0 0 2px #a1a2ad;
+  outline: 5px solid #a1a2ad;
+}
+#submit{
+	display:none;
+	color:#052D23;
+}
+
+</style>
+<form id="myForm" method="post" >
+  <ul id="steps">
+    <li id="step1" class="active">Sign Up</li>
+    <li id="step2">More Info</li>
+    <li id="step3">Final Step</li>
+    <li id="step4">Review</li>
+  </ul>
+  <fieldset id="set1">
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <input type="password" id="password" name="password" placeholder="Password" required>
+    <input type='button' id="next1" value='Next' class="next btn" >
+  </fieldset>
+  <fieldset id="set2">
+    <input type="text" id="firstname" name="firstname" placeholder="FirstName">
+    <input type="text" id="lastname" name="lastname" placeholder="LastName">
+    <input type='button' id="previous2" value='Previous' class="previous btn">
+    <input type='button' id="next2" value='Next' class="next btn">
+  </fieldset>
+  <fieldset id="set3">
+    <input type="text" id="facebook" name="facebook" placeholder="Facebook">
+    <input type="text" id="other" name="other" placeholder="Other Links">
+    <input type='button' id="previous3" value='Previous' class="previous btn">
+    <input type='button' id="next3" value='Review' class="next btn">
+  </fieldset>
+  <fieldset id="review">
+    <div id="review">Review Here</div><br>
+    <input type='button' id="next4" value='Submit' class="btn">
+  </fieldset>
+	<fieldset id="submit">
+		<h2>Done!<br/>Thank you!</h2>
+	</fieldset>
+</form>
+<script>
+var lis = document.getElementsByTagName("li");
+var field = document.getElementsByTagName("fieldset");
+var email = document.getElementById("email");
+var password = document.getElementById("password");
+var firstname = document.getElementById("firstname");
+var lastname = document.getElementById("lastname");
+var phone = document.getElementById("phone");
+var address = document.getElementById("address");
+var facebook = document.getElementById("facebook");
+var other = document.getElementById("other");
+var review = document.getElementById("review");
+var submitbtn = document.getElementById("next4");
+var btnNext = document.getElementsByClassName("next");
+var btnPrev = document.getElementsByClassName("previous");
+for (var i = 0; i < btnNext.length; i++) {
+  btnNext[i].addEventListener('click', showNext, false);
+}
+for (var j = 0; j < btnPrev.length; j++) {
+  btnPrev[j].addEventListener('click', showPrev);
+}
+submitbtn.addEventListener("click", submitme);
+var arr=[];
+function showNext(event) {
+	var childnodes = this.parentElement.children;
+	var temp = Array.prototype.slice.call(childnodes).slice(0,2);
+	//console.log(temp);
+	var myMap = new Map();
+	for(var k=0; k<temp.length; k++){
+		myMap.set(temp[k].name, temp[k].value);		
+	}
+	arr.push(myMap);
+	console.log(arr);
+	
+  var nextPage = this.parentElement.nextElementSibling;
+  var fieldId = this.parentElement.nextElementSibling.id;
+  var liIndex = 0;
+  for (var k = 0; k < field.length; k++) {
+    if (field[k].id == fieldId) {
+      liIndex = k;
+      lis[k].className = "active";
+    }
+  }
+	
+  this.parentElement.style.display = "none";
+  nextPage.style.display = "block";
+  nextPage.style.animation = "showme 0.8s";
+  nextPage.style.animationTimingFunction = "ease-in-out";
+	var items="";
+  if (nextPage.id == "review") {
+		var div = document.createElement("div");
+		var br = document.createElement("br");
+		for(var l=0;l<arr.length; l++){
+			arr[l].forEach(function(value, key) {
+				items=document.createTextNode(key + 'is : ' + value+", ");		
+				div.appendChild(items);
+			});
+		}
+		div.innerHTML =div.innerHTML.split(",").join("<br />");
+    review.insertBefore(div, document.getElementById('next4'));
+  }
+}
+
+function showPrev() {
+  var prePage = this.parentElement.previousElementSibling;
+  var fieldId = this.parentElement.previousElementSibling.id;
+  var liIndex = 0;
+  for (var k = 0; k < field.length; k++) {
+    if (field[k].id == fieldId) {
+      liIndex = k;
+      lis[k + 1].className = "";
+    }
+  }
+  this.parentElement.style.display = "none";
+  prePage.style.display = "block";
+  prePage.style.animation = "hideme 1s";
+  prePage.style.animationTimingFunction = "ease";
+}
+
+
+function submitme(){
+this.parentElement.style.display = "none";
+	document.getElementById("submit").style.display="block";
+}
+</script>
