@@ -1,0 +1,210 @@
+<style>
+body {
+  background-color: #3A405A;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #F4F1DE;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#title {
+  margin: 30px 24px 20px 24px;
+  display: block;
+  font-size: 2em;
+}
+
+nav[role=navigation] {
+  clear: both;
+  overflow: hidden;
+  background-color: #FF7E6B;
+  width: 100%;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  background-color: #FF7E6B;
+  overflow: hidden;
+}
+
+nav ul li {
+  list-style-type: none;
+  float: left;
+  display: inline-block;
+
+  background-color: #FF7E6B;
+}
+
+nav ul li:hover{
+	background: #F4F1DE;
+}
+li a{
+	padding:10px;
+	display:block;
+}
+li a:hover {
+  background: #F4F1DE;
+  color: #3A405A;
+}
+
+.signinfo {
+  float: right;
+  margin-right: 15px;
+	padding:10px;
+}
+
+.signinfo:hover {
+  background-color: #F4F1DE;
+  color: #3A405A;
+}
+
+a {
+  text-decoration: none;
+  color: #F4F1DE;
+}
+
+form {
+  border: 1px solid;
+  border-top-color: rgba(169, 240, 209, 0.3);
+  border-right-color: rgba(169, 240, 209, 0.3);
+  border-bottom-color: rgba(169, 240, 209, 0.3);
+  border-left-color: rgba(169, 240, 209, 0.3);
+  width: 260px;
+  height: 160px;
+  margin: 0 10px 20px 20px;
+  padding: 28px 20px 16px 20px;
+  display: none;
+  float: right;
+  z-index: 20;
+  background-color: rgba(130, 130, 130, .3);
+}
+
+.active {
+  display: block;
+}
+
+form input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+}
+
+form input:focus {
+  border: 1px solid #FF9505;
+  outline: none;
+}
+
+.login,
+.signup {
+  width: 37%;
+  height: 30px;
+  margin-top: 5px;
+  display: inline-block;
+  background-color: #FF7E6B;
+  border: none;
+  color: #F4F1DE;
+  font-size: 16px;
+}
+
+button.login:hover {
+  background-color: #F4F1DE;
+  color: #3A405A;
+}
+
+button.signup:hover {
+  background-color: #F4F1DE;
+  color: #3A405A;
+}
+
+#forgot {
+  margin-top: 15px;
+  display: inline-block;
+  right: 0;
+  position: relative;
+  float: right;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.bigImg {
+  height:660px;
+	width:100%;
+  background-image: url("http://s2.cdn.xiachufang.com/d93388e0234611e7947d0242ac110002_3264w_2176h.jpg?imageView2/2/w/660/interlace/1/q/90");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.footer {
+  margin: 0 auto;
+  box-sizing: border-box;
+	text-align:center;
+	padding-bottom:10px;
+}
+
+.footer p{
+	font-size:10px;
+}
+#footerbar{
+	width:100%;
+	background-color:#A9F0D1;
+	padding:10px 0;
+	margin-bottom:20px;
+}
+</style>
+<div id="title">Want To Cook</div>
+<nav id="menu" role="navigation">
+  <ul>
+    <li><a href="#">Breakfast</a></li>
+    <li><a href="#">Dinner</a></li>
+    <li><a href="#">Baking</a></li>
+    <li><a href="#">Most Popular</a></li>
+    <li class="signinfo" id="loginli">Login</li>
+    <li class="signinfo" id="signup">SignUp</li>
+  </ul>
+</nav>
+<form class="loginForm active" id="loginForm" action="">
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
+  <button type="submit" class="btn login" id="loginbtn">Login</button>
+  <a href="#" id="forgot">Forgot UserName?</a>
+</form>
+
+<form class="signinForm" id="signinForm" action="">
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
+  <button type="submit" class="btn signup" id="signupbtn">SignUp</button>
+</form>
+
+<div class="bigImg">
+</div>
+
+<div class="footer">
+	<div id="footerbar"></div>
+  <h2>Want To Cook</h2>
+  <p>Images are from <a href="https://www.xiachufang.com/">xiachufang.com</a></p>
+  <p>Created by Kacie</p>
+</div>
+<script>
+var login = document.getElementById("loginli");
+var signup = document.getElementById("signup");
+var loginform = document.getElementById("loginForm");
+var signinform = document.getElementById("signinForm");
+login.addEventListener('click', function() {
+  if (signinform.classList.contains("active")) {
+    signinform.classList.remove("active");
+  }
+  loginform.classList.toggle("active");
+});
+signup.addEventListener('click', function() {
+  if (loginform.classList.contains("active")) {
+    loginform.classList.remove("active");
+
+  }
+  signinform.classList.toggle("active");
+});
+
+</script>
