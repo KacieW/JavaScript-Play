@@ -1,0 +1,244 @@
+<style>
+body {
+  background: hsl(240, 45.5%, 97.8%);
+  background-image: linear-gradient(90deg, #D2D4C8 11px, transparent 0), linear-gradient(90deg, #3C1518 23px, transparent 0), linear-gradient(90deg, #838E83 41px, transparent 0);
+  background-size: 41px 100%, 61px 100%, 83px 100%;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#myForm {
+  width: 360px;
+  height: 300px;
+  margin: 60px auto;
+  border: none;
+  border-radius: 2px;
+  z-index: 2;
+  background-color: rgba(255, 179, 15, 0.9);
+  padding: 30px 20px;
+}
+
+input {
+  display: block;
+  line-height: 30px;
+  width: 100%;
+  font-size: 1.2em;
+  box-sizing: border-box;
+  padding: 5px 8px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #F78764;
+}
+
+button {
+  background-color: #2E1F27;
+  width: 30%;
+  height: 40px;
+  font-size: 1.34em;
+  margin-top: 20px;
+  border: none;
+  color: #EF5D60;
+}
+
+.form_requirements {
+  color: #EF1A1D;
+  font-size: 14px;
+  overflow: hidden;
+  max-height: 0;
+}
+
+input[type='password']:invalid:not(:focus):not(:placeholder-shown) ~ .form_requirements {
+  max-height: 200px;
+}
+
+label {
+  position: relative;
+  display: inline-block;
+  padding: 4px 10px;
+  top: 36px;
+  left: 7px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+label:hover {
+  color: #EF5D60;
+}
+
+label.active {
+  color: #EF5D60;
+  top: 10px;
+  background-color: #2E1F27;
+  width: auto;
+  transition: color 0.4s, top 0.4s, background-color 0.8s;
+}
+
+.bg-bubbles {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+}
+
+li {
+  position: absolute;
+  list-style: none;
+  display: block;
+	width: 60px;
+  height: 60px;
+  bottom: -140px;
+  animation: shapes1 25s infinite;
+  transition-timing-function: cubic-bezier(.17,.67,1,.48);
+}
+@keyframes shapes1 {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-700px) rotate(900deg);
+  }
+}
+@keyframes shapes2 {
+  0% { 
+        margin-left:0px;
+    }
+    100% { 
+        margin-left:50px;
+    }
+}
+@keyframes shapes3 {
+  0% { 
+        margin-left:0px;
+    }
+    100% { 
+        margin-left:100px;
+    }
+}
+li:nth-child(1){
+	left:18%;
+	width:20px;
+	height:20px;
+	background-color:rgba(242,244,255, 0.8);
+	transform: scale(0.9);
+  animation: shapes1 15s linear infinite, shapes2 4s ease-in-out infinite alternate;
+}
+.n2{
+  left: 9%;
+  width: 50px;
+  height: 50px;
+	border-radius:50%;
+  animation-delay: 2s;
+	animation: shapes1 25s ease infinite, shapes3 8s ease-in infinite alternate;
+	background-color:rgba(66,188,238, 0.4);
+}
+
+.n3 {
+  left:60%;
+  animation-delay: 6s;
+	width: 40px;
+  height: 40px;
+	animation-duration:14s;
+	background-color:rgba(66,188,238, 0.5);
+}
+
+.n4{
+  left: 40%;
+  width: 0;
+	height: 0;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-bottom: 100px solid rgba(84,13,110, 0.25);
+	animation-delay:4s;
+	animation: shapes1 35s ease-in-out infinite, shapes2 8s linear infinite alternate;
+}
+
+.n5{
+  left: 70%;
+	width: 0;
+	height: 0;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 50px solid rgba(	208,227,196, 0.25);
+	animation-duration: 10s;
+	animation-delay:8s;
+}
+.n6{
+  left: 12%;
+  width: 70px;
+  height: 60px;
+  animation-delay: 23s;
+  background-color: rgba(0,21,20, 0.2);
+	transform: scale(1.9);
+  animation: shapes1 30s linear infinite, shapes2 6s ease-in-out infinite alternate;
+}
+
+.n7{
+  left: 32%;
+  width: 10px;
+  height: 10px;
+  animation-delay: 7s;
+	background-color: rgba(0,21,20, 0.2);
+	animation: shapes1 28s ease infinite, shapes2 6s ease-in-out infinite alternate;
+}
+
+.n8{
+  left: 80%;
+  width: 20px;
+  height: 20px;
+	border-radius:50%;
+  animation-delay: 15s;
+  animation-duration: 40s;
+	background-color: rgba(	199,239,0, 0.4);
+}
+
+
+
+</style>
+<form id="myForm" action="">
+  <div class="inputinfo">
+    <label for="Name">Name</label>
+    <input type="text" id="Name" required>
+  </div>
+  <div class="inputinfo">
+    <label for="Email">Email</label>
+    <input type="email" id="email" required>
+  </div>
+  <div class="inputinfo">
+    <label for="Password">Password</label>
+    <input type="password" id="password" placeholder=" " pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
+    <div class="form_requirements">Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.
+    </div>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+<ul class="bg-bubbles">
+  <li class="shape n1"></li>
+  <li class="shape n2"></li>
+  <li class="shape n3"></li>
+  <li class="shape n4"></li>
+  <li class="shape n5"></li>
+  <li class="shape n6"></li>
+  <li class="shape n7"></li>
+  <li class="shape n8"></li>
+</ul>
+<script>
+var input = document.getElementsByTagName("input");
+for (var i = 0; i < input.length; i++) {
+  input[i].addEventListener('focusin', function() {
+    var floatLabel = this.parentElement.firstElementChild;
+    floatLabel.className = "active";
+  });
+  input[i].addEventListener('focusout', removeFloate);
+}
+
+function removeFloate() {
+  var floatLabel = this.parentElement.firstElementChild;
+  if (this.value == "") {
+    floatLabel.className = "";
+  }
+}
+
+</script>
