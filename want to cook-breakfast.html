@@ -1,0 +1,304 @@
+
+<style>
+/*#3A405A, #8C5E58, #FF7E6B, #A9F0D1, #F4F1DE*/
+body {
+  background-color: #3A405A;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #F4F1DE;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#title {
+  margin: 30px 24px 20px 24px;
+  display: block;
+  font-size: 2em;
+}
+
+nav[role=navigation] {
+  clear: both;
+  overflow: hidden;
+  background-color: #FF7E6B;
+  width: 100%;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  background-color: #FF7E6B;
+  overflow: hidden;
+}
+
+nav ul li {
+  list-style-type: none;
+  float: left;
+  display: inline-block;
+  background-color: #FF7E6B;
+}
+
+nav ul li:hover {
+  background: #F4F1DE;
+}
+
+li a {
+  padding: 10px;
+  display: block;
+}
+
+li a:hover {
+  background: #F4F1DE;
+  color: #3A405A;
+}
+
+.signinfo {
+  float: right;
+  margin-right: 15px;
+  padding: 10px;
+}
+
+.signinfo:hover {
+  background-color: #F4F1DE;
+  color: #3A405A;
+}
+
+a {
+  text-decoration: none;
+  color: #F4F1DE;
+}
+
+form {
+  border: 1px solid;
+  border-top-color: rgba(169, 240, 209, 0.3);
+  border-right-color: rgba(169, 240, 209, 0.3);
+  border-bottom-color: rgba(169, 240, 209, 0.3);
+  border-left-color: rgba(169, 240, 209, 0.3);
+  width: 260px;
+  height: 160px;
+  margin: 0 10px 20px 20px;
+  padding: 28px 20px 16px 20px;
+  display: none;
+  float: right;
+  z-index: 20;
+  background-color: rgba(130, 130, 130, .3);
+}
+
+.active {
+  display: block;
+}
+
+form input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+}
+
+form input:focus {
+  border: 1px solid #FF9505;
+  outline: none;
+}
+
+.login,
+.signup {
+  width: 37%;
+  height: 30px;
+  margin-top: 5px;
+  display: inline-block;
+  background-color: #FF7E6B;
+  border: none;
+  color: #F4F1DE;
+  font-size: 16px;
+}
+
+button.login:hover {
+  background-color: #F4F1DE;
+  color: #3A405A;
+}
+
+button.signup:hover {
+  background-color: #F4F1DE;
+  color: #3A405A;
+}
+
+#forgot {
+  margin-top: 15px;
+  display: inline-block;
+  right: 0;
+  position: relative;
+  float: right;
+  padding: 5px;
+  font-size: 12px;
+}
+
+/*****************************breakfast content******************/
+
+.breakfastList {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+}
+.breakfast {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.imgleft{	
+  height: 290px;
+  width: 460px;
+	flex-shrink: 0;
+}
+#banmian {
+  background: url(http://s2.cdn.xiachufang.com/e391c41c890111e6a9a10242ac110002_1000w_663h.jpg?imageView2/2/w/660/interlace/1/q/90) no-repeat;
+	background-size: cover;
+}
+
+#zhengdan {
+  background: url(http://s2.cdn.xiachufang.com/cf575a7a876211e6a9a10242ac110002_700w_525h.jpg?imageView2/2/w/660/interlace/1/q/90) no-repeat;
+	background-size: cover;
+}
+
+.description-right {
+  flex-grow: 1;
+  text-align: left;
+  padding:0 12px;
+}
+
+.description-p {
+  font-size: 14px;
+}
+
+.step {
+  position: relative;
+  display: inline-block;
+  margin-top: 14px;
+}
+
+.likes {
+  position: absolute;
+  display: inline-block;
+  background: #c8c8c8;
+  cursor: pointer;
+  height: 13px;
+  width: 13px;
+  transform: rotate(45deg);
+  margin: 28px 2px 2px 32px;
+}
+
+.likes::before,
+.likes::after {
+  content: "";
+  height: inherit;
+  width: inherit;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.likes::before {
+  position: absolute;
+  top: 0;
+  left: -7.5px;
+}
+
+.likes::after {
+  position: absolute;
+  top: -7.5px;
+}
+
+.likes:hover {
+  background: #FF7E6B;
+  transform: rotate(45deg) scale(1.2);
+}
+
+.likes.liked {
+  background: #FF7E6B;
+}
+
+.divbar {
+  width: 100%;
+  background-color: #8C5E58;
+  padding: 2px 0;
+}
+
+.footer {
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.footer p {
+  font-size: 10px;
+}
+
+#footerbar {
+  width: 100%;
+  background-color: #A9F0D1;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+</style>
+<div id="title">Want To Cook</div>
+<nav id="menu" role="navigation">
+  <ul>
+    <li><a href="#">Breakfast</a></li>
+    <li><a href="#">Dinner</a></li>
+    <li><a href="#">Baking</a></li>
+    <li><a href="#">Most Popular</a></li>
+    <li class="signinfo" id="loginli">Login</li>
+    <li class="signinfo" id="signup">SignUp</li>
+  </ul>
+</nav>
+
+<div class="main-breakfast">
+  <ul class="breakfastList">
+    <li id="breakfast-banmian" class="breakfast">
+      <div id="banmian" class="imgleft"></div>
+      <div id="banmian-description" class="description-right">
+        <h2>葱油拌面</h2>
+        <p class="description-p">本帮菜，以家常、平民化为自身的特色，常用的烹调方法以红烧、煨、糖为主，烹饪上善于用糟，以浓油赤酱、咸淡适中、醇厚鲜美著称。</p>
+        <p class="description-p">
+          以上介绍与如何做葱油拌面无关，如果想知道详细步骤，请自行到原网站查询。本图借鉴于下厨房，纯属个人练习使用，无任何商业用途，如有他人盗图使用，与本人无关</p>
+        <div class="step"><a href="#">Steps to make it</a></div>
+        <div class="likes">
+        </div>
+      </div>
+    </li>
+    <div class="divbar"></div>
+    <li clas="breakfast-zhengdan" class="breakfast">
+      <div id="zhengdan" class="imgleft"></div>
+      <div id="zhengdan-description" class="description-right">
+        <h2>蒸蛋</h2>
+        <p class="description-p">蒸蛋，简单，省时，富有营养，老少皆宜。以蛋的鲜嫩程度来评价厨师的水平。</p>
+        <p class="description-p">
+          以上都是我乱说的，如果想知道详细步骤，请自行到原网站查询。本图借鉴于下厨房，纯属个人练习使用，无任何商业用途，如有他人盗图使用，与本人无关</p>
+        <div class="step"><a href="#">Steps to make it</a></div>
+        <div class="likes">
+        </div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+
+
+<div class="footer">
+  <div id="footerbar"></div>
+  <h2>Want To Cook</h2>
+  <p>Images are from <a href="https://www.xiachufang.com/">xiachufang.com</a></p>
+  <p>Created by Kacie</p>
+</div>
+<script>
+var like = document.getElementById("likes");
+like.addEventListener("click", likeIt);
+
+function likeIt() {
+  this.classList.toggle("liked");
+}
+
+</script>
