@@ -5,4 +5,4 @@ This done by adding the "ng-app" attribute to the "ROOT" HTML element of the Ang
 #### View: ng-controller
 ng-controller tells AngularJS what controller to use with this view. 
 
-The controller function is registered in angular via the ## angular.module(...).controller(...) function call.
+The controller function is registered in angular via the ## angular.module(...).controller(...)## function call.
