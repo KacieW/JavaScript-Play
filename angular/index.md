@@ -1,4 +1,4 @@
 Point to AngularJS app
-1.ng-app:
+#### ng-app:
 We tell what part of the HTML contains the AngularJS app. 
 This done by adding the "ng-app" attribute to the "ROOT" HTML element of the AngularJS app. 
