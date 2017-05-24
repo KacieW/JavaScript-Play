@@ -1,110 +1,134 @@
-function Node(element){
-	this.element = element;
-	this.next = null;
+//create a linklist: 必须有一个head为null, 还必须有一个长度length.
+function LinkedList() {
+  this.head = null;
+  this.length = 0;
 }
-
-function SingleList (){
-	this.head = null;
-	this.length = 0;
+//helper class "NODE": node必须有一个element属性，还要有一个next=null的属性
+function Node(element) {
+  this.element = element;
+  this.next = null;
 }
-
-SingleList.prototype.add = function(value){
-  var myNode = new Node(value);
-  var currentNode;
-  
-  if(this.head === null){
-    //point head to the new added node, which is myNode
-    this.head = myNode;
-  }else{
-    //find the last element in the list, start from the begining of the list, which is the "head", then use while to find the currentNode.next == null.
-    currentNode = this.head;
-    while(currentNode.next){
-      //updated the pointer "currentNode" with the new find element, which its next is not null, in the list.
-      currentNode = currentNode.next;
-    }
-    //find the last element in the list, then point the last element to the new added element, which is myNode.
-    currentNode.next =myNode;
-  }
-  this.length++;
-  return myNode;
-};
-
-
-SingleList.prototype.findNode = function(position){
-  var currentNode =this.head;
-  var counter =0;
-  if(position<0 ||position>this.length||this.length==0){
-    return false;
-  }
-  while(counter<position ){
-    currentNode = currentNode.next
-    counter++;
-  }
-  return currentNode;
-};
-
-SingleList.prototype.remove = function(position){
-  var previous;
-  var currentNode = this.head;
-  var counter=0;
-  if(position>this.length || position<0){
-    return null;
-  }
-  if(position==0){
-    currentNode = currentNode.next;
-  }else{
-    //console.log("not 1");
-    while(counter<position){
-      previous = currentNode;
-      currentNode = currentNode.next;
-      counter++;
-    }
-    previous.next = currentNode.next;
-  }
-  this.length--;
-  return currentNode;
-};
-
-SingleList.prototype.insert = function(position, element){
-  if(position<=this.length||position>=0){
-    //console.log(element);
-    var currentNode = this.head;
-    var myNode = new Node(element);
-    var previous;
-    var counter = 0;
-    //insert as the first element
-    if(position===0){
-      //console.log(position);
+//加入一个element
+LinkedList.prototype.add = function(element) {
+    var myNode = new Node(element); //新建一个node，把element传进去
+    var current; //current指针
+    //情况一：list is empty，把要加的head指向(->)node就可.即head等于node
+    if (this.head === null) {
       this.head = myNode;
-      myNode.next = currentNode;
+    } else {
+      //情况二：list不为空，找到list最后一个元素，把要加的元素放到它后面就可以。
+      /*先让current指向head，当current被赋值后，就可以loop current.next， 如果current.next不为null， 就将current指针移位，即current=current.next*/
+      current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      /*当current.next为null时，说明已经找到列表的最后一个element，把node放到最后就可以，即current.next(等号左边)指向node（在等号右边）*/
+      current.next = myNode;
     }
-    //insert at anywhere in the list
-   else{
-       while(counter<position){
-         previous = currentNode;
-         currentNode = currentNode.next;
-         counter++;
-       }
-      previous.next = myNode;
-      myNode.next = currentNode;
-    }
-   
     this.length++;
-    return true;
-  }else{
-    return false;
   }
-  
-};
+  //删除一个element
+LinkedList.prototype.remove = function(position) {
 
-var myTest = new SingleList();
-myTest.add(5);
-myTest.add(6);
-myTest.add(7);
+    var myNode = new Node(position); //根据要删除的位置，新建一个要被删除的node
+    //先检查一下要删除的位置是否有效
+    if (position < 0 || position >= this.length) {
+      return null;
+    } else {
+      var current = this.head; //把head的值给current
+      var previous;
+      var index = 0;
+      //情况一：remove first element，即position为0，只要把head指向第二个元素（current.next）就可以
+      if (position === 0) {
+        this.head = current.next;
+      } else {
+        //情况二：删list里面或最后一个element
+        while (index < position) { //当index小于要删除的位置时，我们就移位即可
+          previous = current; //把previous指向current
+          current = current.next; //current变成current.next
+          index++;
+        }
+        //找到要删除的位置时，跳过当前的元素，把前一个和后一个连起来就可以
+        previous.next = current.next;
+      }
+    }
+    this.length--;
+  }
+  //插入一个元素
+LinkedList.prototype.insert = function(insertPosition, insertElem) {
+    //新建一个要插入的元素
+    var myNode = new Node(insertElem);
+    var current = this.head; //把head的值附给current
+    var previous;
+    var index = 0;
+    //检查position是否有效
+    if (insertPosition < 0 || insertPosition > this.length) {
+      return false;
+    } else {
+      /*情况一：insert element between head and first element， ￥￥￥先把node.next跟后面的element连起来，再把head跟node连起来￥￥￥￥ ！！顺序很重要！！*/
+      if (insertPosition == 0) {
+        myNode.next = current;
+        this.head = myNode;
+      } else {
+        //情况二：在队中或队尾插入，在没找到位置之前，只进行移位
+        while (index < insertPosition) {
+          previous = current;
+          current = current.next;
+          index++;
+        }
+        //找到位置后，顺序很重要，先把node.next的下家找好，这样才有备无患，然后把previous.next指向node
+        myNode.next = current;
+        previous.next = myNode;
+      }
+      this.length++;
+      return true;
+    }
+  }
+  //查找元素是否存在
+LinkedList.prototype.find = function(element) {
+  var index = 0;
+  var current = this.head;
+  while (current) { //当current不为null时，即没到队尾时
+    if (current.element == element) { //当前element如果等于被找的element
+      return index; //返回当前这个element的index
+    }
+    index++;
+    current = current.next; //移位继续找
+  }
+  return -1; //如果没找到，或者list为null，就返回-1
+}
 
-//myTest.findNode(6);
-//console.log(myTest.findNode(0));
+function reverseMe(linkedlist) {
+  var nodeArr = [];//用数组来储存linkedlist里的内容
+  var current = linkedlist.head;
+	//当linkedlist还有element的时候
+  while (current) {
+    nodeArr.push(current);//把每个element拿出来，放到array里面
+    current = current.next;//进行移位工作
+  }
+	//把所有的element都放到array后，新建一个空的linkedlist，用来放置rever的element
+	var reversedList = new LinkedList();
+	//把数组里最后一个element先赋值给head，不然没有办法loop，这时head：9->null
+  reversedList.head = nodeArr.pop();
+  var currentReversed = reversedList.head;
+	reversedList.length=1;//新linkedlist长度加1
 
-//console.log(myTest.insert(3,8));
-//console.log(myTest.findNode(3));
-//console.log(myTest.remove(1));
+  var popNode = nodeArr.pop();//在接着把这时数组最后一个pop出来，用来做while循环：7->9->null
+  while (popNode) {
+    popNode.next = null;//先把node的next变成null，不然不好用，而且他还会保留原来的下一个element的指向
+		currentReversed.next = popNode;//把current.next指向node
+		currentReversed = currentReversed.next;//移位
+		popNode = nodeArr.pop();//在pop出一个新的element接着做while循环
+		reversedList.length++;
+  }
+  return reversedList;//返回reverse后的链表
+}
+var tryMe = new LinkedList();
+tryMe.add(4);
+tryMe.add(1);
+tryMe.add(7);
+tryMe.add(9);
+console.log(tryMe);
+//var me = tryMe.find(6);
+var me  = reverseMe(tryMe);
+console.log(me);
