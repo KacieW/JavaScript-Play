@@ -29,7 +29,6 @@ LinkedList.prototype.add = function(element) {
   }
   //删除一个element
 LinkedList.prototype.remove = function(position) {
-
     var myNode = new Node(position); //根据要删除的位置，新建一个要被删除的node
     //先检查一下要删除的位置是否有效
     if (position < 0 || position >= this.length) {
@@ -53,6 +52,7 @@ LinkedList.prototype.remove = function(position) {
       }
     }
     this.length--;
+    return current;
   }
   //插入一个元素
 LinkedList.prototype.insert = function(insertPosition, insertElem) {
@@ -99,29 +99,58 @@ LinkedList.prototype.find = function(element) {
 }
 
 function reverseMe(linkedlist) {
-  var nodeArr = [];//用数组来储存linkedlist里的内容
+  var nodeArr = []; //用数组来储存linkedlist里的内容
   var current = linkedlist.head;
-	//当linkedlist还有element的时候
+  //当linkedlist还有element的时候
   while (current) {
-    nodeArr.push(current);//把每个element拿出来，放到array里面
-    current = current.next;//进行移位工作
+    nodeArr.push(current); //把每个element拿出来，放到array里面
+    current = current.next; //进行移位工作
   }
-	//把所有的element都放到array后，新建一个空的linkedlist，用来放置rever的element
-	var reversedList = new LinkedList();
-	//把数组里最后一个element先赋值给head，不然没有办法loop，这时head：9->null
+  //把所有的element都放到array后，新建一个空的linkedlist，用来放置rever的element
+  var reversedList = new LinkedList();
+  //把数组里最后一个element先赋值给head，不然没有办法loop，这时head：9->null
   reversedList.head = nodeArr.pop();
   var currentReversed = reversedList.head;
-	reversedList.length=1;//新linkedlist长度加1
+  reversedList.length = 1; //新linkedlist长度加1
 
-  var popNode = nodeArr.pop();//在接着把这时数组最后一个pop出来，用来做while循环：7->9->null
+  var popNode = nodeArr.pop(); //在接着把这时数组最后一个pop出来，用来做while循环：7->9->null
   while (popNode) {
-    popNode.next = null;//先把node的next变成null，不然不好用，而且他还会保留原来的下一个element的指向
-		currentReversed.next = popNode;//把current.next指向node
-		currentReversed = currentReversed.next;//移位
-		popNode = nodeArr.pop();//在pop出一个新的element接着做while循环
-		reversedList.length++;
+    popNode.next = null; //先把node的next变成null，不然不好用，而且他还会保留原来的下一个element的指向
+    currentReversed.next = popNode; //把current.next指向node
+    currentReversed = currentReversed.next; //移位
+    popNode = nodeArr.pop(); //在pop出一个新的element接着做while循环
+    reversedList.length++;
   }
-  return reversedList;//返回reverse后的链表
+  return reversedList; //返回reverse后的链表
+}
+//找到倒数第k个的element
+function findKthFromEnd(linklist, k) {
+  var current = linklist.head;
+  var index = 0;
+  var leng = linklist.length - k;
+  if (k <= 0 || k > linklist.length) {
+    return false;
+  }
+  while (current) {//当current不为null
+    if (index < leng) {//没找到，就继续移位
+      current = current.next;
+    }
+    if (index == leng) {//找到了，就直接返回current node即可
+      return current;
+    }
+    index++;
+  }
+};
+//删除倒数第k个element
+function deleteKthFromEnd(linklist, k) {
+  var leng = linklist.length;
+  if (k <= 0 || k > leng) {
+    return false;
+  } else {
+    var position = leng - k;//算数正数第几个的值
+    var temp = linklist.remove(position);//删掉该正数位置上的element就可以
+    return linklist;
+  }
 }
 var tryMe = new LinkedList();
 tryMe.add(4);
@@ -129,6 +158,9 @@ tryMe.add(1);
 tryMe.add(7);
 tryMe.add(9);
 console.log(tryMe);
+//tryMe.remove(1);
 //var me = tryMe.find(6);
-var me  = reverseMe(tryMe);
+//var me  = reverseMe(tryMe);
+//var me = findKthFromEnd(tryMe,8);
+var me = deleteKthFromEnd(tryMe, 4);
 console.log(me);
