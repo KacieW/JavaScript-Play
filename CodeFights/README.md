@@ -1,6 +1,6 @@
 # Array 
 
-## Issues that I faced
+## Challenge
 #### 1. Find first duplicate ####
   Thoughts that did not work : tried to walk through the array, use the first element to check if there is a same one in the rest of 
   the array, then use the second one to do the same thing. If find the same one, return the element, which will be the first
