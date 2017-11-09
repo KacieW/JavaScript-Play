@@ -40,3 +40,18 @@ var d = a.map(function(s, index){
 }, arr);
 return d; //[-1, 150, 160, 170, -1, -1, 180, 190]
 ```
+
+
+## Map works on string and elements, 以一种别扭的方式...
+```js
+Array.prototype.map.call('Hello', function(x){
+    return x;
+});
+//it is the same as 'Hello'.split("");
+```
+```js
+Array.prototype.map.call(element, function(obj){
+    return obj.value;
+});
+//Same as Array.from(element)
+```
