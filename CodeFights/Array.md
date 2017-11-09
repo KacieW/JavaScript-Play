@@ -70,7 +70,55 @@ one or not. If the cryp word start 0, return false.
 - Turn each string of number to real number, then check if the sum of the first two equals the third one.
 
 
+## Interact with Array
+#### Flat an Array
+- `[].concat.apply([], arr)`, it is equivalent to `[].concat(arr)`
+```js
+var myArr = [].concat.apply([], [1, [2], [3,4]]) // myArr=> [1, 2, 3, 4]
+```
+- `array.reduce()` combind with `array.concat()`
+```js
+var flatten = [[1,2,3], [3, 4], [6]].reduce(function(acc, b){
+  return acc.concat(b);
+}, []);
+//[1, 2, 3, 3, 4, 6]
+``` 
+#### Merge Arrays
+- `arr1.concat(arr2)`: return a new array
+- `Array.prototype.push.apply(arr1, arr2)`
+- `arr1.push(...arr2)`
+#### Turn Array-like Object to Array
+- `Array.from(elems)`
+- `Array.prototype.slice.call(arguments)`
+- `Array.prototype.forEach.call(NodeList, function(){......})`
 
+#### String to Array
+- `str.split("")`
+- `Array.from(str)`
+
+#### Array.reduce()
+- sum the value of an array
+- flatten an array
+- Counting instances of values in an object
+```js
+var names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+
+var countedNames = names.reduce(function (allNames, name) { 
+  if (name in allNames) {
+    allNames[name]++;
+  }
+  else {
+    allNames[name] = 1;
+  }
+  return allNames;
+}, {});
+// countedNames is: { 'Alice': 2, 'Bob': 1, 'Tiff': 1, 'Bruce': 1 }
+```
+#### Verify if it is an Array
+- `Array.isArray(x)`: check if x is an array.
+- `x.instanceof Array`
+- `x.constructor === Array`
+- `Object.prototype.toString.call(x)==='[Object Array]'`
 
 
 
