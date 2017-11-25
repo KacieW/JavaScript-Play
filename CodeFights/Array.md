@@ -100,6 +100,7 @@ var flatten = [[1,2,3], [3, 4], [6]].reduce(function(acc, b){
 - sum the value of an array
 - flatten an array
 - Counting instances of values in an object
+
 ```js
 var names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
 
@@ -114,6 +115,18 @@ var countedNames = names.reduce(function (allNames, name) {
 }, {});
 // countedNames is: { 'Alice': 2, 'Bob': 1, 'Tiff': 1, 'Bruce': 1 }
 ```
+- **Find the longest string in the array**
+```js
+var arr=["a", "adfasdf", "asdf"];
+arr.reduce((acc,x)=>{
+    if(acc.length>x.length){
+        return acc;
+    }else{
+        return x;
+    }
+});
+```
+
 #### Verify if it is an Array
 - `Array.isArray(x)`: check if x is an array.
 - `x.instanceof Array`
